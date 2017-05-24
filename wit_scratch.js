@@ -114,7 +114,7 @@
     ext.make_entity = function(entity, callback){
         $.ajax({
           url: 'https://api.wit.ai/entities?v=20170506',
-          data: {
+          form: {
             'id': 'favorite_food',
             'access_token' : token
           },
