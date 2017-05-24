@@ -64,8 +64,8 @@
 
         //set url (part of the url is the target entity)
         var url_t = 'https://api.wit.ai/entities/';
-        url_t += target
-        url_t += '?v=20170307'
+        url_t += target;
+        url_t += '?v=20170307';
 
         $.ajax({
           url: url_t,
@@ -112,13 +112,17 @@
     };
 */
     ext.make_entity = function(entity, callback){
+      var url_t = 'http://localhost:3000/entity/';
+      url_t += token;
+      url_t += '/';
+      url_t += entity;
         $.ajax({
-          url: 'https://api.wit.ai/entities?v=20170506',
+          url: url_t,
           form: {
             'id': 'favorite_food',
             'access_token' : token
           },
-          method: 'POST',
+          method: 'GET',
           success: function(response) {
               console.log("success!", response);
               callback();
