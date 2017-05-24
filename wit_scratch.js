@@ -118,7 +118,7 @@
       url_t += entity;
         $.ajax({
           url: url_t,
-          form: {
+          data: {
             'id': 'favorite_food',
             'access_token' : token
           },
