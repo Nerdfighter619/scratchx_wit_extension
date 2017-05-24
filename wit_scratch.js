@@ -118,7 +118,6 @@
             'id': 'favorite_food',
             'access_token' : token
           },
-          dataType: 'jsonp',
           method: 'POST',
           success: function(response) {
               console.log("success!", response);
