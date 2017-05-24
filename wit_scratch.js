@@ -110,7 +110,7 @@
           }
         });
     };
-
+*/
     ext.make_entity = function(entity, callback){
         $.ajax({
           url: 'https://api.wit.ai/entities?v=20170506',
@@ -125,7 +125,7 @@
               callback();
           }
         });
-    };*/
+    };
 
     ext.get_all_entitites = function(callback){
         //get all entities associated with the chatbot
@@ -148,8 +148,8 @@
     var descriptor = {
         blocks: [
             /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],
-            ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
-            ['w', 'create entity named %s','make_entity','favorite_food'],*/
+            ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],*/
+            ['w', 'create entity named %s','make_entity','favorite_food'],
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
             ['R','all entities','get_all_entitites'],
             ['R', 'get %s for %s','get_response','intent','What is your name?'],
