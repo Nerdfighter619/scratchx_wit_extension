@@ -34,20 +34,27 @@ app.post('/validate/:token/:message/:entities/:values',function(req, res){
 	var auth_token = 'Bearer '
 	auth_token += req.params.token
 
+	//something to fix the message goes here
+	message = req.params.message
+	message = message.replace('%20', ' ')
+	message = message.replace('%3F', '?')
+
 	var headers = {
 		'Authorization': auth_token,
 		'Content-Type': 'application/json'
 	}
 
 	var input = '[{"text":"'
-	input += req.params.message
-	input += '","entities":[{'
+	input += message
+	input += '","entities":[{"entity":"'
 
 	//make this work for multiple entities
 	input += req.params.entities
 	input += '","value":"'
 	input += req.params.values
 	input += '"}]}]'
+
+	console.log(input)
 
 	var options = {
 		url: 'https://api.wit.ai/samples?v=20170506',
