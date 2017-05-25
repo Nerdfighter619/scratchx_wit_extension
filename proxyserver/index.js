@@ -1,6 +1,10 @@
 var express = require('express');
 var request = require('request');
+var cors =require('cors');
 var app = express();
+
+//allow cross-domain requests
+app.use(cors())
 
 //make entity
 app.post('/entity/:token/:entity',function(req, res){
@@ -26,7 +30,7 @@ app.post('/entity/:token/:entity',function(req, res){
 		console.log(body)
 	})
 
-	//res.send('success!'); Will need to make this output some sort of response
+	res.send('success!'); 
 });
 
 //validate example sentance
@@ -66,7 +70,7 @@ app.post('/validate/:token/:message/:entities/:values',function(req, res){
 		console.log(body)
 	})
 
-	//res.send('success!');
+	res.send('success!');
 });
 
 

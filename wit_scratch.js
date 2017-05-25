@@ -98,11 +98,11 @@
         }
         entities_sorted = [{'entity':entities,'value':values}]*/
 
-        //remove spaces from the message to make it sendable via URL
+        //encode URI
         var message = encodeURI(text);
         message = message.replace('?', '%3F')
-        console.log(message)
 
+        //make the URL for the proxy server
         var url_t = proxy_address + 'validate/';
         url_t += token;
         url_t += '/';
