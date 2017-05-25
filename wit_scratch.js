@@ -109,9 +109,9 @@
         url_t += '/';
         url_t += message;
         url_t += '/';
-        url_t += entities;
-        url_t += '/';
-        url_t += values;
+        url_t += entities_sorted;
+        /*url_t += '/';
+        url_t += values;*/
 
         $.ajax({
           url: url_t,

@@ -34,13 +34,15 @@ app.post('/entity/:token/:entity',function(req, res){
 });
 
 //validate example sentance
-app.post('/validate/:token/:message/:entities/:values',function(req, res){
+app.post('/validate/:token/:message/:entities',function(req, res){
 	var auth_token = 'Bearer '
 	auth_token += req.params.token
 
 	//something to fix the message goes here
 	message = decodeURI(req.params.message)
 	message = message.replace('%3F','?')
+
+	entities = decodeURI(req.params.entities)
 
 	var headers = {
 		'Authorization': auth_token,
@@ -49,13 +51,14 @@ app.post('/validate/:token/:message/:entities/:values',function(req, res){
 
 	var input = '[{"text":"'
 	input += message
-	input += '","entities":[{"entity":"'
+	input += '","entities":'//[{"entity":"'
+	input += entities
 
 	//make this work for multiple entities
-	input += req.params.entities
+	/*input += req.params.entities
 	input += '","value":"'
 	input += req.params.values
-	input += '"}]}]'
+	input += '"}]}]'*/
 
 	console.log(input)
 
