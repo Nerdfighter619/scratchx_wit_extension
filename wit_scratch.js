@@ -101,6 +101,7 @@
         //try{
           for (i=0;i<entities.length-1;i++){
               entities_sorted.push({'entity':entity[i],'value':value[i]})
+              console.log(entities_sorted)
           }
         //}
         /*catch(err){
