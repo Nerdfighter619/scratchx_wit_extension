@@ -100,6 +100,7 @@
 
         //remove spaces from the message to make it sendable via URL
         var message = encodeURI(text);
+        console.log(message)
 
         var url_t = proxy_address + 'validate/';
         url_t += token;
