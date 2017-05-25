@@ -96,6 +96,7 @@
         //if entities/values are lists, make them lists (they default to being strings)
         entities = entities.split(' ');
         values = values.split(' ');
+        console.log(entities);
         var entities_sorted = []
         try{
           for (i=0;i<entity.length;i++){
