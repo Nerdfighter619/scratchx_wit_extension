@@ -96,8 +96,9 @@
         for (i=0;i<entity.;i++){
             entities_sorted.push({'entity':entity[i],'value':value[i]})
         }*/
-        entities_sorted = '[{"entity":entities,"value":values}]'
-        console.log(encodeURI(entities_sorted))
+        entities_sorted = [{"entity":entities,"value":values}]
+        entities_sorted = encodeURI(JSON.stringify(entities_sorted))
+        console.log(entities_sorted)
 
         //encode URI
         var message = encodeURI(text);
