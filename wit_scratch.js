@@ -101,7 +101,7 @@
         //remove spaces from the message to make it sendable via URL
         var message = text
         message = message.replace(' ', '%20')
-        message = str.replace('?', '%3F')
+        message = message.replace('?', '%3F')
 
         var url_t = proxy_address + 'validate/';
         url_t += token;
