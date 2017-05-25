@@ -93,6 +93,7 @@
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
         var entities_sorted = []
+        console.log(entities)
         try{
           for (i=0;i<entity.length;i++){
               entities_sorted.push({'entity':entity[i],'value':value[i]})
