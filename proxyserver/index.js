@@ -51,14 +51,9 @@ app.post('/validate/:token/:message/:entities',function(req, res){
 
 	var input = '[{"text":"'
 	input += message
-	input += '","entities":'//[{"entity":"'
+	input += '","entities":'
 	input += entities
-
-	//make this work for multiple entities
-	/*input += req.params.entities
-	input += '","value":"'
-	input += req.params.values
-	input += '"}]}]'*/
+	input += '}]'
 
 	console.log(input)
 
