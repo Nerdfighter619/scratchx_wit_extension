@@ -92,8 +92,11 @@
 
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
+
+        //if entities/values are lists, make them lists (they default to being strings)
+        entities = entities.split(' ');
+        values = values.split(' ');
         var entities_sorted = []
-        console.log(entities)
         try{
           for (i=0;i<entity.length;i++){
               entities_sorted.push({'entity':entity[i],'value':value[i]})
