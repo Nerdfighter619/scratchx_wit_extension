@@ -26,10 +26,42 @@ app.post('/entity/:token/:entity',function(req, res){
 		console.log(body)
 	})
 
-	res.send('success!');
+	//res.send('success!'); Will need to make this output some sort of response
 });
 
 //validate example sentance
+app.post('/validate/:token/:message/:entities/:values',function(req, res){
+	var auth_token = 'Bearer '
+	auth_token += req.params.token
+
+	var headers = {
+		'Authorization': auth_token,
+		'Content-Type': 'application/json'
+	}
+
+	var input = '[{"text":"'
+	input += req.params.message
+	input += '","entities":[{'
+
+	//make this work for multiple entities
+	input += req.params.entities
+	input += '","value":"'
+	input += req.params.values
+	input += '"}]}]'
+
+	var options = {
+		url: 'https://api.wit.ai/samples?v=20170506',
+		method: 'POST',
+		headers: headers,
+		form: input
+	}
+
+	request(options, function(error,response,body){
+		console.log(body)
+	})
+
+	//res.send('success!');
+});
 
 
 app.listen(3000);

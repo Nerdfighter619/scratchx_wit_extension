@@ -90,24 +90,32 @@
         token = new_token;
     };
 
-    ext.validate = function(text,entities,values){
+    ext.validate = function(text,entities,values,callback){
         //validate an example sentance
         /*var entities_sorted = []
         for (i=0;i<entity.;i++){
             entities_sorted.push({'entity':entity[i],'value':value[i]})
-        }*/
-        entities_sorted = [{'entity':entities,'value':values}]
+        }
+        entities_sorted = [{'entity':entities,'value':values}]*/
+
+        //remove spaces from the message to make it sendable via URL
+        var message = 'Where%20are%20you%3F'
+
+        var url_t = proxy_address + 'validate/';
+        url_t += token;
+        url_t += '/';
+        url_t += message;
+        url_t += '/';
+        url_t += entities;
+        url_t += '/';
+        url_t += values;
+
         $.ajax({
-          url: 'https://api.wit.ai/samples?v=20170506',
-          data: {
-            'text': text,
-            'entities':entities_sorted,
-            'access_token' : token
-          },
-          dataType: 'jsonp',
+          url: url_t,
           method: 'POST',
           success: function(response) {
               console.log("success!", response);
+              callback();
           }
         });
     };
@@ -147,8 +155,8 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],
-            ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],*/
+            /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
+            ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
             ['w', 'create entity named %s','make_entity','favorite_food'],
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
             ['R','all entities','get_all_entitites'],
