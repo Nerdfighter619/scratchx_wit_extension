@@ -2,7 +2,8 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
-app.get('/entity/:token/:entity',function(req, res){
+//make entity
+app.post('/entity/:token/:entity',function(req, res){
 	var auth_token = 'Bearer '
 	auth_token += req.params.token
 
@@ -25,7 +26,10 @@ app.get('/entity/:token/:entity',function(req, res){
 		console.log(body)
 	})
 
-	res.send('entity is: ' + req.params.entity);
+	res.send('success!');
 });
+
+//validate example sentance
+
 
 app.listen(3000);

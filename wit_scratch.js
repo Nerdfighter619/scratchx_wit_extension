@@ -90,13 +90,13 @@
         token = new_token;
     };
 
-    /*ext.validate = function(text,entity,value){
+    ext.validate = function(text,entities,values){
         //validate an example sentance
-        var entities_sorted = []
+        /*var entities_sorted = []
         for (i=0;i<entity.;i++){
             entities_sorted.push({'entity':entity[i],'value':value[i]})
-        }
-        entities_sorted = [{'entity':entity,'value':values}]
+        }*/
+        entities_sorted = [{'entity':entities,'value':values}]
         $.ajax({
           url: 'https://api.wit.ai/samples?v=20170506',
           data: {
@@ -111,7 +111,7 @@
           }
         });
     };
-*/
+
     ext.make_entity = function(entity, callback){
       var url_t = proxy_address + 'entity/';
       url_t += token;
@@ -119,7 +119,7 @@
       url_t += entity;
         $.ajax({
           url: url_t,
-          method: 'GET',
+          method: 'POST',
           success: function(response) {
               console.log("success!", response);
               callback();
