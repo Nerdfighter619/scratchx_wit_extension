@@ -96,16 +96,13 @@
         //if entities/values are lists, make them lists (they default to being strings)
         entities = entities.split(' ');
         values = values.split(' ');
-        console.log(entities);
         var entities_sorted = []
         try{
           for (i=0;i<entities.length;i++){
-              console.log(entities_sorted)
               entities_sorted.push({'entity':entities[i],'value':values[i]})
           }
         }
         catch(err){
-          console.log(err)
           entities_sorted = [{"entity":entities,"value":values}]
         }
         entities_sorted = encodeURI(JSON.stringify(entities_sorted))
