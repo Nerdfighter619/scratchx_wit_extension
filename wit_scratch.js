@@ -100,6 +100,7 @@
         }
         catch(err){
           entities_sorted = [{"entity":entities,"value":values}]
+          console.log('Single input')
         }
         entities_sorted = encodeURI(JSON.stringify(entities_sorted))
         console.log(entities_sorted)
