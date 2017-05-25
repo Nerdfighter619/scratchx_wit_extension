@@ -1,6 +1,7 @@
 (function(ext) {
     var token = 'EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J';
-    var app_name = 'TestApp'
+    var proxy_address = 'http://localhost:3000/'
+    var app_name = 'TestApp';
     // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
 
@@ -112,7 +113,7 @@
     };
 */
     ext.make_entity = function(entity, callback){
-      var url_t = 'http://localhost:3000/entity/';
+      var url_t = proxy_address + 'entity/';
       url_t += token;
       url_t += '/';
       url_t += entity;
