@@ -99,7 +99,7 @@
         console.log(entities);
         var entities_sorted = []
         try{
-          for (i=0;i<entities.length;i++){
+          for (i=0;i<entities.length-1;i++){
               entities_sorted.push({'entity':entity[i],'value':value[i]})
           }
         }
