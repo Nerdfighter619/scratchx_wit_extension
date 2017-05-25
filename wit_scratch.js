@@ -119,10 +119,6 @@
       url_t += entity;
         $.ajax({
           url: url_t,
-          data: {
-            'id': 'favorite_food',
-            'access_token' : token
-          },
           method: 'GET',
           success: function(response) {
               console.log("success!", response);
