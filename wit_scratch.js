@@ -93,10 +93,14 @@
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
         var entities_sorted = []
-        for (i=0;i<entity.length;i++){
-            entities_sorted.push({'entity':entity[i],'value':value[i]})
+        try{
+          for (i=0;i<entity.length;i++){
+              entities_sorted.push({'entity':entity[i],'value':value[i]})
+          }
         }
-        //entities_sorted = [{"entity":entities,"value":values}]
+        catch(err){
+          entities_sorted = [{"entity":entities,"value":values}]
+        }
         entities_sorted = encodeURI(JSON.stringify(entities_sorted))
         console.log(entities_sorted)
 
