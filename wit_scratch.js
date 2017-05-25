@@ -98,16 +98,16 @@
         values = values.split(' ');
         console.log(entities);
         var entities_sorted = []
-        //try{
+        try{
           for (i=0;i<entities.length-1;i++){
               console.log(entities_sorted)
-              entities_sorted.push(JSON.stringify({'entity':entity[i],'value':value[i]}))
+              entities_sorted.push({'entity':entity[i],'value':value[i]})
           }
-        //}
-        /*catch(err){
+        }
+        catch(err){
+          console.log(err)
           entities_sorted = [{"entity":entities,"value":values}]
-          console.log('Single input')
-        }*/
+        }
         entities_sorted = encodeURI(JSON.stringify(entities_sorted))
         console.log(entities_sorted)
 
