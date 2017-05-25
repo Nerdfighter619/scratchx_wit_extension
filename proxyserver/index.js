@@ -36,6 +36,7 @@ app.post('/validate/:token/:message/:entities/:values',function(req, res){
 
 	//something to fix the message goes here
 	message = decodeURI(req.params.message)
+	message = message.replace('%3F','?')
 
 	var headers = {
 		'Authorization': auth_token,
