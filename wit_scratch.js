@@ -158,7 +158,14 @@
         var entities_sorted = []
         try{
           for (i=0;i<entities.length;i++){
+            if (text.includes(values[i]) == true){
+              start = text.indexOf(values[i]);
+              end = text.lastIndexOf(values[i]);
+              entities_sorted.push({'entity':entities[i],'value':values[i], 'start':start, 'end':end})
+            }
+            else{
               entities_sorted.push({'entity':entities[i],'value':values[i]})
+            }
           }
         }
         catch(err){
