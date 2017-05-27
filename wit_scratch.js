@@ -11,7 +11,7 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    /*ext.create_app = function(name, lang, private){
+    ext.create_app = function(name, lang, private){
         //creates a new wit app -- DOESN'T WORK
         
         if (name == app_name){
@@ -35,7 +35,7 @@
               }
             });
         }
-    };*/
+    };
 
     ext.get_response = function(target, query, callback){
         //get one of the entities from wit's interpretation of your sentance
@@ -60,7 +60,7 @@
         });
     };
 
-    ext.get_all_values = function(target, callback){
+    ext.get_number_of_values = function(target, callback){
         //get all the possible values for an entity
 
         //set url (part of the url is the target entity)
@@ -81,6 +81,65 @@
               for (i = 0; i < response['values'].length;i++){
                 output.push(response['values'][i]['value'])
               }
+              callback(output.length);
+          }
+        });
+    };
+
+    ext.get_number_of_entities = function(callback){
+        //get all entities associated with the chatbot
+
+        $.ajax({
+          url: 'https://api.wit.ai/entities?v=20170506',
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              output = response.length
+              callback(output);
+          }
+        });
+    };
+
+    ext.get_value_from_number = function(target, n, callback){
+        //get the value associated with a number
+
+        //set url (part of the url is the target entity)
+        var url_t = 'https://api.wit.ai/entities/';
+        url_t += target;
+        url_t += '?v=20170307';
+
+        $.ajax({
+          url: url_t,
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              output = response['values'][n]['value'];
+              callback(output);
+          }
+        });
+    };
+
+    ext.get_entity_from_number = function(n, callback){
+        //get all entities associated with the chatbot
+
+        $.ajax({
+          url: 'https://api.wit.ai/entities?v=20170506',
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              output = response[n];
               callback(output);
           }
         });
@@ -106,7 +165,6 @@
           entities_sorted = [{"entity":entities,"value":values}]
         }
         entities_sorted = encodeURI(JSON.stringify(entities_sorted))
-        console.log(entities_sorted)
 
         //encode URI
         var message = encodeURI(text);
@@ -145,37 +203,25 @@
         });
     };
 
-    ext.get_all_entitites = function(callback){
-        //get all entities associated with the chatbot
 
-        $.ajax({
-          url: 'https://api.wit.ai/entities?v=20170506',
-          data: {
-            'access_token' : token
-          },
-          dataType: 'jsonp',
-          method: 'GET',
-          success: function(response) {
-              console.log("success!", response);
-              callback(response);
-          }
-        });
-    }
 
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
+            ['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],
             ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
             ['w', 'create entity named %s','make_entity','favorite_food'],
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
-            ['R','all entities','get_all_entitites'],
+            ['R','number of entities','get_number_of_entities'],
             ['R', 'get %s for %s','get_response','intent','What is your name?'],
-            ['R','get all values for %s','get_all_values','intent']
+            ['R','get number of values for %s','get_number_of_values','intent'],
+            ['R','for %s get value number %n','get_value_from_number','intent','0'],
+            ['R','get entity number %n','get_entity_from_number','intent','0']
+
         ],
-        /*menus: {
+        menus: {
             privacy: ['true','false']
-        },*/
+        },
     };
 
     // Register the extension

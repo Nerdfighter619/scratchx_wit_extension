@@ -8,12 +8,12 @@ app.use(cors())
 
 //make entity
 app.post('/entity/:token/:entity',function(req, res){
-	var auth_token = 'Bearer '
-	auth_token += req.params.token
+	var auth_token = 'Bearer ';
+	auth_token += req.params.token;
 
-	var input = '{"id":"'
-	input += req.params.entity
-	input += '"}'
+	var input = '{"id":"';
+	input += req.params.entity;
+	input += '"}';
 	var headers = {
 		'Authorization': auth_token,
 		'Content-Type': 'application/json'
@@ -35,25 +35,25 @@ app.post('/entity/:token/:entity',function(req, res){
 
 //validate example sentance
 app.post('/validate/:token/:message/:entities',function(req, res){
-	var auth_token = 'Bearer '
-	auth_token += req.params.token
+	var auth_token = 'Bearer ';
+	auth_token += req.params.token;
 
 	//something to fix the message goes here
-	message = decodeURI(req.params.message)
-	message = message.replace('%3F','?')
+	message = decodeURI(req.params.message);
+	message = message.replace('%3F','?');
 
-	entities = decodeURI(req.params.entities)
+	entities = decodeURI(req.params.entities);
 
 	var headers = {
 		'Authorization': auth_token,
 		'Content-Type': 'application/json'
 	}
 
-	var input = '[{"text":"'
-	input += message
-	input += '","entities":'
-	input += entities
-	input += '}]'
+	var input = '[{"text":"';
+	input += message;
+	input += '","entities":';
+	input += entities;
+	input += '}]';
 
 	console.log(input)
 
