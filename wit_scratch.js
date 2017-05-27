@@ -160,7 +160,7 @@
           for (i=0;i<entities.length;i++){
             if (text.includes(values[i]) == true){
               start = text.indexOf(values[i]);
-              end = text.indexOf(values[i]) + values[i].length;
+              end = text.indexOf(values[i]) + values[i].length - 1;
               entities_sorted.push({'entity':entities[i],'value':values[i], 'start':start, 'end':end})
             }
             else{
