@@ -72,7 +72,7 @@ app.post('/validate/:token/:message/:entities',function(req, res){
 });
 
 //add a new value to an entity
-app.post('/entity_val/:token/:entity/:value',function(req, res){
+app.post('/entityval/:token/:entity/:value',function(req, res){
 	var auth_token = 'Bearer ';
 	auth_token += req.params.token;
 

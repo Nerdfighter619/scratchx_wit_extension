@@ -211,7 +211,7 @@
     };
 
     ext.make_value = function(entity, value, callback){
-      var url_t = proxy_address + 'entity_val/';
+      var url_t = proxy_address + 'entityval/';
       url_t += token;
       url_t += '/';
       url_t += entity;
