@@ -71,5 +71,36 @@ app.post('/validate/:token/:message/:entities',function(req, res){
 	res.send('success!');
 });
 
+//add a new value to an entity
+app.post('/entity_val/:token/:entity/:value',function(req, res){
+	var auth_token = 'Bearer ';
+	auth_token += req.params.token;
+
+	var input = '{"value":"';
+	input += req.params.value;
+	input += '"}';
+
+	var url = 'https://api.wit.ai/entities'
+	url += req.params.entity
+	url += '?v=20170506'
+
+	var headers = {
+		'Authorization': auth_token,
+		'Content-Type': 'application/json'
+	}
+
+	var options = {
+		url: url,
+		method: 'POST',
+		headers: headers,
+		form: input
+	}
+
+	request(options, function(error,response,body){
+		console.log(body)
+	})
+
+	res.send('success!'); 
+});
 
 app.listen(3000);
