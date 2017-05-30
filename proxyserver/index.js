@@ -80,9 +80,11 @@ app.post('/entityval/:token/:entity/:value',function(req, res){
 	input += req.params.value;
 	input += '"}';
 
-	var url = 'https://api.wit.ai/entities'
+	var url = 'https://api.wit.ai/entities/'
 	url += req.params.entity
-	url += '?v=20170506'
+	url += '/values?v=20170506'
+
+	console.log(url)
 
 	var headers = {
 		'Authorization': auth_token,
