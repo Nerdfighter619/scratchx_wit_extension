@@ -218,6 +218,8 @@
       url_t += '/';
       url_t += value;
 
+      url_t = encodeURI(url_t);
+
         $.ajax({
           url: url_t,
           method: 'POST',
@@ -232,7 +234,7 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],
+            /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
             ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
             ['w', 'create entity named %s','make_entity','favorite_food'],
             ['w', 'for %s create value named %s','make_value','favorite_food', 'cake'],
