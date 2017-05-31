@@ -196,7 +196,7 @@
         //validate an example sentance
         var url_t = ''
 
-        create_new_entites = function(entities){
+        create_new_entites = function(entities, callback){
           for (i=0;i<entities.length;i++){
             if (all_entities.indexOf(entities[i]) == -1){
               ext.make_entity(entities[i],function(){
@@ -230,88 +230,90 @@
         if (typeof(values) == 'string'){
           values = [values]
         }
-        get_new_entities(create_new_entites(entities));
-          for (i=0;i<entities.length;i++){
-            //create entities if they do not exist
-            
+        get_new_entities(create_new_entites(entities),function(){
+            for (i=0;i<entities.length;i++){
+              //create entities if they do not exist
+              
 
-            /*//get all the possible values for the entity
-            url_t = 'https://api.wit.ai/entities/';
-            url_t += entities[i];
-            url_t += '?v=20170307';
-            $.ajax({
-              url: url_t,
-              data: {
-                'access_token' : token
-              },
-              dataType: 'jsonp',
-              method: 'GET',
-              success: function(response) {
-                  console.log("all values:", response);
-                  output = [];
-                  for (i = 0; i < response['values'].length;i++){
-                    output.push(response['values'][i]['value'])
-                    all_values = output;
-                  }
-              }
-            });
-
-            if (all_values.indexOf(values[i]) == -1){
-              url_t = proxy_address + 'entityval/';
-              url_t += token;
-              url_t += '/';
+              /*//get all the possible values for the entity
+              url_t = 'https://api.wit.ai/entities/';
               url_t += entities[i];
-              url_t += '/';
-              url_t += values[i];
+              url_t += '?v=20170307';
+              $.ajax({
+                url: url_t,
+                data: {
+                  'access_token' : token
+                },
+                dataType: 'jsonp',
+                method: 'GET',
+                success: function(response) {
+                    console.log("all values:", response);
+                    output = [];
+                    for (i = 0; i < response['values'].length;i++){
+                      output.push(response['values'][i]['value'])
+                      all_values = output;
+                    }
+                }
+              });
 
-              url_t = encodeURI(url_t);
+              if (all_values.indexOf(values[i]) == -1){
+                url_t = proxy_address + 'entityval/';
+                url_t += token;
+                url_t += '/';
+                url_t += entities[i];
+                url_t += '/';
+                url_t += values[i];
 
-                $.ajax({
-                  url: url_t,
-                  method: 'POST',
-                  success: function(response) {
-                      console.log("success!", response);
-                      callback();
-                  }
-                });
-            }*/
+                url_t = encodeURI(url_t);
 
-            //add values and entities to input
-            console.log('test')
-            if (text.includes(values[i]) == true){
-              start = text.indexOf(values[i]);
-              end = text.indexOf(values[i]) + values[i].length - 1;
-              entities_sorted.push({'entity':entities[i],'value':values[i], 'start':start, 'end':end})
+                  $.ajax({
+                    url: url_t,
+                    method: 'POST',
+                    success: function(response) {
+                        console.log("success!", response);
+                        callback();
+                    }
+                  });
+              }*/
+
+              //add values and entities to input
+              console.log('test')
+              if (text.includes(values[i]) == true){
+                start = text.indexOf(values[i]);
+                end = text.indexOf(values[i]) + values[i].length - 1;
+                entities_sorted.push({'entity':entities[i],'value':values[i], 'start':start, 'end':end})
+              }
+              else{
+                entities_sorted.push({'entity':entities[i],'value':values[i]})
+              }
             }
-            else{
-              entities_sorted.push({'entity':entities[i],'value':values[i]})
+          /*catch(err){
+            entities_sorted = [{"entity":entities,"value":values}]
+          }*/
+          entities_sorted = encodeURI(JSON.stringify(entities_sorted))
+
+          //encode URI
+          var message = encodeURI(text);
+          message = message.replace('?', '%3F')
+
+          //make the URL for the proxy server
+          url_t = proxy_address + 'validate/';
+          url_t += token;
+          url_t += '/';
+          url_t += message;
+          url_t += '/';
+          url_t += entities_sorted;
+
+          $.ajax({
+            url: url_t,
+            method: 'POST',
+            success: function(response) {
+                console.log("success!", response);
+                callback();
             }
-          }
-        /*catch(err){
-          entities_sorted = [{"entity":entities,"value":values}]
-        }*/
-        entities_sorted = encodeURI(JSON.stringify(entities_sorted))
-
-        //encode URI
-        var message = encodeURI(text);
-        message = message.replace('?', '%3F')
-
-        //make the URL for the proxy server
-        url_t = proxy_address + 'validate/';
-        url_t += token;
-        url_t += '/';
-        url_t += message;
-        url_t += '/';
-        url_t += entities_sorted;
-
-        $.ajax({
-          url: url_t,
-          method: 'POST',
-          success: function(response) {
-              console.log("success!", response);
-              callback();
-          }
+          });
         });
+          
     };
 
     ext.make_entity = function(entity, callback){
