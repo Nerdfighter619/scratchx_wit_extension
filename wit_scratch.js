@@ -329,7 +329,7 @@
         });
     };
 
-    ext.make_missing_entities = function(entities, callback){
+    ext.make_missing_entities = function(entities, callback_main){
       var new_entities = []
       ext.get_all_entities(function(inp){
           console.log('getting entities')
@@ -346,11 +346,11 @@
             ext.make_entity(entities[i],function(){
               console.log('making entity')
               if(i == new_entities.length - 1){
-                callback();
+                callback_main();
               }
             })
             if(new_entities.length == 0){
-              callback();
+              callback_main();
             }
           }
         });

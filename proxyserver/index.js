@@ -30,7 +30,7 @@ app.post('/entity/:token/:entity',function(req, res){
 		console.log(body)
 	})
 
-	res.send('success!'); 
+	res.send('entity made!'); 
 });
 
 //validate example sentance
