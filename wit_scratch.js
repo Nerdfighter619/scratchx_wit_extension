@@ -147,7 +147,6 @@
 
     ext.get_all_entities = function(callback){
         //get all entities associated with the chatbot
-        console.log('is this thing on?')
         $.ajax({
           url: 'https://api.wit.ai/entities?v=20170506',
           data: {
@@ -198,7 +197,7 @@
         var url_t = ''
 
         //get all entities associated with the chatbot
-        ext.get_all_entities(function(inp){
+        all_entities = ext.get_all_entities(function(inp){
           console.log('getting entities')
           return inp
         });
@@ -217,7 +216,7 @@
           for (i=0;i<entities.length;i++){
             //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
-              make_entity(entities[i],function(){
+              ext.make_entity(entities[i],function(){
                 console.log('making entity')
               })
             }
@@ -301,7 +300,6 @@
     };
 
     ext.make_entity = function(entity, callback){
-      console.log('is this thing on?')
       var url_t = proxy_address + 'entity/';
       url_t += token;
       url_t += '/';
