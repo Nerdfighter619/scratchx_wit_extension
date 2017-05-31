@@ -194,6 +194,7 @@
 
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
+        url_t = ''
 
         //get all entities associated with the chatbot
         $.ajax({
@@ -223,15 +224,24 @@
           for (i=0;i<entities.length;i++){
             //create values or entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
-              make_entity(entities[i]);
+              url_t = proxy_address + 'entity/';
+              url_t += token;
+              url_t += '/';
+              url_t += entities[i];
+              $.ajax({
+                url: url_t,
+                method: 'POST',
+                success: function(response) {
+                  console.log("success!", response);
+                  callback();
+                }
+              });
             }
-            //get all the possible values for the entity
 
-            //set url (part of the url is the target entity)
-            var url_t = 'https://api.wit.ai/entities/';
+            //get all the possible values for the entity
+            url_t = 'https://api.wit.ai/entities/';
             url_t += entities[i];
             url_t += '?v=20170307';
-
             $.ajax({
               url: url_t,
               data: {
@@ -250,7 +260,23 @@
             });
 
             if (all_values.indexOf(values[i]) == -1){
-              make_value(values[i]);
+              url_t = proxy_address + 'entityval/';
+              url_t += token;
+              url_t += '/';
+              url_t += entities[i];
+              url_t += '/';
+              url_t += values[i];
+
+              url_t = encodeURI(url_t);
+
+                $.ajax({
+                  url: url_t,
+                  method: 'POST',
+                  success: function(response) {
+                      console.log("success!", response);
+                      callback();
+                  }
+                });
             }
 
             //add values and entities to input
