@@ -147,6 +147,7 @@
 
     ext.get_all_entities = function(callback){
         //get all entities associated with the chatbot
+        console.log('is this thing on?')
         $.ajax({
           url: 'https://api.wit.ai/entities?v=20170506',
           data: {
