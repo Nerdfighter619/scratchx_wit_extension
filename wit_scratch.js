@@ -209,7 +209,7 @@
               all_entities = response;
           }
         });
-        var all_values = [];
+        //var all_values = [];
 
         //if entities/values are lists, make them lists (they default to being strings)
         entities = entities.split(' ');
@@ -222,7 +222,7 @@
           values = [values]
         }
           for (i=0;i<entities.length;i++){
-            //create values or entities if they do not exist
+            //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
               url_t = proxy_address + 'entity/';
               url_t += token;
@@ -238,7 +238,7 @@
               });
             }
 
-            //get all the possible values for the entity
+            /*//get all the possible values for the entity
             url_t = 'https://api.wit.ai/entities/';
             url_t += entities[i];
             url_t += '?v=20170307';
@@ -277,7 +277,7 @@
                       callback();
                   }
                 });
-            }
+            }*/
 
             //add values and entities to input
             if (text.includes(values[i]) == true){
