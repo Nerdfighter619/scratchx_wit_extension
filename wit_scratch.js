@@ -330,7 +330,7 @@
     };
 
     ext.make_missing_entities = function(entities, callback){
-      var callbackCalled = false;
+      var new_entities = []
       ext.get_all_entities(function(inp){
           console.log('getting entities')
           all_entities = inp;
@@ -339,18 +339,21 @@
             console.log(entities[i])
             //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
-              ext.make_entity(entities[i],function(){
-                console.log('making entity')
-                callbackCalled = true;
-                callback();
-              })
+              new_entities.push(entities[i])
             }
           }
-          if (callbackCalled == false){
-            //callback();
+          for (i=0;i<new_entities.length;i++){
+            ext.make_entity(entities[i],function(){
+              console.log('making entity')
+              if(i == new_entities.length - 1){
+                callback();
+              }
+            })
+            if(new_entities.length == 0){
+              callback();
+            }
           }
         });
-      //callback();
     };
 
 
