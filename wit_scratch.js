@@ -197,7 +197,7 @@
         var url_t = ''
 
         //get all entities associated with the chatbot
-        all_entities = ext.get_all_entities(function(inp){
+        ext.get_all_entities(function(inp){
           console.log('getting entities')
           all_entities = inp;
           console.log(all_entities)
@@ -216,7 +216,6 @@
         if (typeof(values) == 'string'){
           values = [values]
         }
-        console.log('test')
           for (i=0;i<entities.length;i++){
             //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
@@ -267,6 +266,7 @@
             }*/
 
             //add values and entities to input
+            console.log('test')
             if (text.includes(values[i]) == true){
               start = text.indexOf(values[i]);
               end = text.indexOf(values[i]) + values[i].length - 1;
