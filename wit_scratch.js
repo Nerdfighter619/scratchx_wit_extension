@@ -335,6 +335,7 @@
           all_entities = inp;
           console.log(all_entities)
           for (i=0;i<entities.length;i++){
+            console.log(entities[i])
             //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
               ext.make_entity(entities[i],function(){
