@@ -204,7 +204,7 @@
           dataType: 'jsonp',
           method: 'GET',
           success: function(response) {
-              console.log("success!", response);
+              console.log("all entities:", response);
               all_entities = response;
           }
         });
@@ -220,8 +220,31 @@
             if (all_entities.indexOf(entities[i]) == -1){
               make_entity(entities[i]);
             }
-            all_values = get_all_values(entities[i]);
-            if (all_vales.indexOf(values[i]) == -1){
+            //get all the possible values for the entity
+
+            //set url (part of the url is the target entity)
+            var url_t = 'https://api.wit.ai/entities/';
+            url_t += entities[i];
+            url_t += '?v=20170307';
+
+            $.ajax({
+              url: url_t,
+              data: {
+                'access_token' : token
+              },
+              dataType: 'jsonp',
+              method: 'GET',
+              success: function(response) {
+                  console.log("all values:", response);
+                  output = [];
+                  for (i = 0; i < response['values'].length;i++){
+                    output.push(response['values'][i]['value'])
+                    all_values = output;
+                  }
+              }
+            });
+
+            if (all_values.indexOf(values[i]) == -1){
               make_value(values[i]);
             }
 
@@ -246,7 +269,7 @@
         message = message.replace('?', '%3F')
 
         //make the URL for the proxy server
-        var url_t = proxy_address + 'validate/';
+        url_t = proxy_address + 'validate/';
         url_t += token;
         url_t += '/';
         url_t += message;
