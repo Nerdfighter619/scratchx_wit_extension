@@ -197,17 +197,8 @@
         url_t = ''
 
         //get all entities associated with the chatbot
-        $.ajax({
-          url: 'https://api.wit.ai/entities?v=20170506',
-          data: {
-            'access_token' : token
-          },
-          dataType: 'jsonp',
-          method: 'GET',
-          success: function(response) {
-              console.log("all entities:", response);
-              all_entities = response;
-          }
+        all_values = get_all_values(function(){
+          console.log('getting entities')
         });
         //var all_values = [];
 
@@ -224,18 +215,9 @@
           for (i=0;i<entities.length;i++){
             //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
-              url_t = proxy_address + 'entity/';
-              url_t += token;
-              url_t += '/';
-              url_t += entities[i];
-              $.ajax({
-                url: url_t,
-                method: 'POST',
-                success: function(response) {
-                  console.log("success!", response);
-                  callback();
-                }
-              });
+              make_entity(entities[i],function(){
+                console.log('making entity')
+              })
             }
 
             /*//get all the possible values for the entity
