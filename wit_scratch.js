@@ -194,21 +194,22 @@
 
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
+
+        //if entities/values are lists, make them lists (they default to being strings)
+        entities = entities.split(' ');
+        values = values.split(' ');
+        var entities_sorted = []
+        if (typeof(entities) == 'string'){
+          entities = [entities]
+        }
+        if (typeof(values) == 'string'){
+          values = [values]
+        }
+
         ext.make_missing_entities(entities, function(){
           var url_t = ''   
           
           //var all_values = [];
-
-          //if entities/values are lists, make them lists (they default to being strings)
-          entities = entities.split(' ');
-          values = values.split(' ');
-          var entities_sorted = []
-          if (typeof(entities) == 'string'){
-            entities = [entities]
-          }
-          if (typeof(values) == 'string'){
-            values = [values]
-          }
             for (i=0;i<entities.length;i++){
               //create entities if they do not exist
               /*//get all the possible values for the entity
