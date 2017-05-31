@@ -218,6 +218,7 @@
             if (all_entities.indexOf(entities[i]) == -1){
               ext.make_entity(entities[i],function(){
                 console.log('making entity')
+                return 'test'
               })
             }
 
@@ -300,6 +301,7 @@
     };
 
     ext.make_entity = function(entity, callback){
+      console.log('is this thing on?')
       var url_t = proxy_address + 'entity/';
       url_t += token;
       url_t += '/';
