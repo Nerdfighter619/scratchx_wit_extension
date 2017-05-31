@@ -345,7 +345,9 @@
           for (i=0;i<new_entities.length;i++){
             ext.make_entity(entities[i],function(){
               console.log('making entity')
+              console.log(i)
               if(i == new_entities.length - 1){
+                console.log('calling back!')
                 callback_main();
               }
             })
