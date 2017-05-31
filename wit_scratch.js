@@ -348,10 +348,12 @@
               console.log(i)
               if(i == new_entities.length){
                 console.log('calling back!')
+                await sleep(2000)
                 callback_main();
               }
             })
             if(new_entities.length == 0){
+              await sleep(2000)
               callback_main();
             }
           }
