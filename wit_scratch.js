@@ -216,12 +216,12 @@
         if (typeof(values) == 'string'){
           values = [values]
         }
+        console.log('test')
           for (i=0;i<entities.length;i++){
             //create entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
               ext.make_entity(entities[i],function(){
                 console.log('making entity')
-                return 'test'
               })
             }
 
