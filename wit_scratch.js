@@ -195,10 +195,10 @@
 
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
-        url_t = ''
+        var url_t = ''
 
         //get all entities associated with the chatbot
-        all_values = get_all_values(function(){
+        all_entities = get_all_entities(function(){
           console.log('getting entities')
         });
         //var all_values = [];
