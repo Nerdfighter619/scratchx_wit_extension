@@ -198,7 +198,7 @@
         var url_t = ''
 
         //get all entities associated with the chatbot
-        get_all_entities(function(inp){
+        ext.get_all_entities(function(inp){
           console.log('getting entities')
           return inp
         });
