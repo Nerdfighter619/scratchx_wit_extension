@@ -330,6 +330,9 @@
     };
 
     ext.make_missing_entities = function(entities, callback_main){
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
       var new_entities = []
       ext.get_all_entities(function(inp){
           console.log('getting entities')
@@ -348,10 +351,12 @@
               console.log(i)
               if(i == new_entities.length){
                 console.log('calling back!')
+                await sleep(2000)
                 callback_main();
               }
             })
             if(new_entities.length == 0){
+              await sleep(2000)
               callback_main();
             }
           }
