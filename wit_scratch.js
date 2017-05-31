@@ -330,6 +330,7 @@
     };
 
     ext.make_missing_entities = function(entities, callback){
+      var callbackCalled = false;
       ext.get_all_entities(function(inp){
           console.log('getting entities')
           all_entities = inp;
@@ -340,10 +341,14 @@
             if (all_entities.indexOf(entities[i]) == -1){
               ext.make_entity(entities[i],function(){
                 console.log('making entity')
+                callbackCalled = true;
+                callback();
               })
             }
           }
-          callback();
+          if (callbackCalled == false){
+            callback();
+          }
         });
       //callback();
     };
