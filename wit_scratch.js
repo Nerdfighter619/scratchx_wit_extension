@@ -214,7 +214,12 @@
         entities = entities.split(' ');
         values = values.split(' ');
         var entities_sorted = []
-        try{
+        if (typeof(entities) = 'string'){
+          entities = [entities]
+        }
+        if (typeof(values) = 'string'){
+          values = [values]
+        }
           for (i=0;i<entities.length;i++){
             //create values or entities if they do not exist
             if (all_entities.indexOf(entities[i]) == -1){
@@ -258,10 +263,9 @@
               entities_sorted.push({'entity':entities[i],'value':values[i]})
             }
           }
-        }
-        catch(err){
+        /*catch(err){
           entities_sorted = [{"entity":entities,"value":values}]
-        }
+        }*/
         entities_sorted = encodeURI(JSON.stringify(entities_sorted))
 
         //encode URI
