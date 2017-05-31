@@ -214,10 +214,10 @@
         entities = entities.split(' ');
         values = values.split(' ');
         var entities_sorted = []
-        if (typeof(entities) = 'string'){
+        if (typeof(entities) == 'string'){
           entities = [entities]
         }
-        if (typeof(values) = 'string'){
+        if (typeof(values) == 'string'){
           values = [values]
         }
           for (i=0;i<entities.length;i++){
