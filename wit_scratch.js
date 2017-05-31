@@ -196,12 +196,26 @@
         //validate an example sentance
         var url_t = ''
 
-        //get all entities associated with the chatbot
-        ext.get_all_entities(function(inp){
-          console.log('getting entities')
-          all_entities = inp;
-          console.log(all_entities)
-        });
+        create_new_entites = function(entities){
+          for (i=0;i<entities.length;i++){
+            if (all_entities.indexOf(entities[i]) == -1){
+              ext.make_entity(entities[i],function(){
+                console.log('making entity')
+              })
+            }
+          }
+        }
+
+        get_new_entities = function(callback){
+          //get all entities associated with the chatbot
+          ext.get_all_entities(function(inp){
+            console.log('getting entities')
+            all_entities = inp;
+            console.log(all_entities)
+          });
+          callback();
+        }
+
 
         
         //var all_values = [];
@@ -216,13 +230,10 @@
         if (typeof(values) == 'string'){
           values = [values]
         }
+        get_new_entities(create_new_entites(entities));
           for (i=0;i<entities.length;i++){
             //create entities if they do not exist
-            if (all_entities.indexOf(entities[i]) == -1){
-              ext.make_entity(entities[i],function(){
-                console.log('making entity')
-              })
-            }
+            
 
             /*//get all the possible values for the entity
             url_t = 'https://api.wit.ai/entities/';
