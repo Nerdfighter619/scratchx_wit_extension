@@ -299,6 +299,7 @@
     };
 
     ext.make_entity = function(entity, callback){
+      console.log('is this thing on?')
       var url_t = proxy_address + 'entity/';
       url_t += token;
       url_t += '/';
