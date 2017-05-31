@@ -205,6 +205,7 @@
         if (typeof(values) == 'string'){
           values = [values]
         }
+        console.log(entities)
 
         ext.make_missing_entities(entities, function(){
           var url_t = ''   
