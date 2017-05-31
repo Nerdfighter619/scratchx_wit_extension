@@ -198,6 +198,7 @@
 
         //get all entities associated with the chatbot
         all_entities = ext.get_all_entities(function(inp){
+          inp = 'test'
           console.log('getting entities')
           all_entities = inp;
         });
