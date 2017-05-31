@@ -147,7 +147,6 @@
 
     ext.get_all_entities = function(callback){
         //get all entities associated with the chatbot
-
         $.ajax({
           url: 'https://api.wit.ai/entities?v=20170506',
           data: {
@@ -196,9 +195,19 @@
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
 
-        //get a list of all the entities
-        var all_entities = get_all_entities();
-        console.log(test);
+        //get all entities associated with the chatbot
+        $.ajax({
+          url: 'https://api.wit.ai/entities?v=20170506',
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              all_entities = response;
+          }
+        });
         var all_values = [];
 
         //if entities/values are lists, make them lists (they default to being strings)
