@@ -343,8 +343,9 @@
               })
             }
           }
+          callback();
         });
-      callback();
+      //callback();
     };
 
 
