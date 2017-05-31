@@ -201,6 +201,8 @@
           console.log('getting entities')
           return inp
         });
+
+        console.log(all_entities)
         //var all_values = [];
 
         //if entities/values are lists, make them lists (they default to being strings)
