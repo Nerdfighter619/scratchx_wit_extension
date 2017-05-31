@@ -347,7 +347,7 @@
             }
           }
           if (callbackCalled == false){
-            callback();
+            //callback();
           }
         });
       //callback();
