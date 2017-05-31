@@ -145,6 +145,50 @@
         });
     };
 
+    ext.get_all_entities = function(callback){
+        //get all entities associated with the chatbot
+
+        $.ajax({
+          url: 'https://api.wit.ai/entities?v=20170506',
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              output = response;
+              callback(output);
+          }
+        });
+    };
+
+    ext.get_all_values = function(target, callback){
+        //get all the possible values for an entity
+
+        //set url (part of the url is the target entity)
+        var url_t = 'https://api.wit.ai/entities/';
+        url_t += target;
+        url_t += '?v=20170307';
+
+        $.ajax({
+          url: url_t,
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              output = [];
+              for (i = 0; i < response['values'].length;i++){
+                output.push(response['values'][i]['value'])
+              }
+              callback(output);
+          }
+        });
+    };
+
     ext.set_token = function(new_token){
         token = new_token;
     };
@@ -152,12 +196,26 @@
     ext.validate = function(text,entities,values,callback){
         //validate an example sentance
 
+        //get a list of all the entities
+        var all_entities = get_all_entities();
+        var all_values = [];
+
         //if entities/values are lists, make them lists (they default to being strings)
         entities = entities.split(' ');
         values = values.split(' ');
         var entities_sorted = []
         try{
           for (i=0;i<entities.length;i++){
+            //create values or entities if they do not exist
+            if (all_entities.indexOf(entities[i]) == -1){
+              make_entity(entities[i]);
+            }
+            all_values = get_all_values(entities[i]);
+            if (all_vales.indexOf(values[i]) == -1){
+              make_value(values[i]);
+            }
+
+            //add values and entities to input
             if (text.includes(values[i]) == true){
               start = text.indexOf(values[i]);
               end = text.indexOf(values[i]) + values[i].length - 1;
@@ -236,8 +294,8 @@
         blocks: [
             /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
             ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
-            ['w', 'create entity named %s','make_entity','favorite_food'],
-            ['w', 'for %s create value named %s','make_value','favorite_food', 'cake'],
+            /*['w', 'create entity named %s','make_entity','favorite_food'],
+            ['w', 'for %s create value named %s','make_value','favorite_food', 'cake'],*/
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
             ['R','number of entities','get_number_of_entities'],
             ['R', 'get %s for %s','get_response','intent','What is your name?'],
