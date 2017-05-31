@@ -198,6 +198,7 @@
 
         //get a list of all the entities
         var all_entities = get_all_entities();
+        console.log(test);
         var all_values = [];
 
         //if entities/values are lists, make them lists (they default to being strings)
