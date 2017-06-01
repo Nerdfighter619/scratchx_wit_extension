@@ -331,7 +331,7 @@
     var descriptor = {
         blocks: [
             /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
-            ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
+            ['w', 'train bot to interpret %s with entities %s that have values %s','validate','Where are you?','intent','location_get'],
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
            // ['R','number of entities','get_number_of_entities'],
             ['R', 'get %s for %s','get_interpretation','intent','What is your name?'],
