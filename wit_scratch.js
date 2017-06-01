@@ -351,9 +351,9 @@
                 setTimeout(callback_main, 2000)
               }
             })
-            if(new_entities.length == 0){
-              callback_main();
-            }
+          }
+          if(new_entities.length == 0){
+            callback_main();
           }
         });
     };
