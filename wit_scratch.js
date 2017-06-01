@@ -331,7 +331,7 @@
               }
               callback(output);
           }
-          failure: function(response){
+          error: function(response){
             console.log("FAIL", response);
             output = false;
             callback(output);
