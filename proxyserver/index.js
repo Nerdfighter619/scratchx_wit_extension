@@ -129,16 +129,13 @@ app.get('/check/:token',function(req, res){
 
 	request(options, function(error,response,body){
 		console.log(body)
-		if(Array.isArray(body) == true){
-			output = true;
-			console.log('ARRAY');
+		if(body.includes('{') == true){
+			output = false;
 		}
 		else{
-			output = false;
-			console.log('NOT ARRAY');
-			console.log(Array.isArray(body));
+			output = true;
 		}
-		res.send(body);
+		res.send(output);
 	})
 
 	//res.send(['checked',output]); 
