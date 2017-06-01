@@ -107,6 +107,7 @@ app.post('/entityval/:token/:entity/:value',function(req, res){
 
 //check connection
 app.get('/check/:token',function(req, res){
+	var output = false;
 	var auth_token = 'Bearer ';
 	auth_token += req.params.token;
 
@@ -128,9 +129,19 @@ app.get('/check/:token',function(req, res){
 
 	request(options, function(error,response,body){
 		console.log(body)
+		if(Array.isArray(body) == true){
+			output = true;
+			console.log('ARRAY');
+		}
+		else{
+			output = false;
+			console.log('NOT ARRAY');
+			console.log(Array.isArray(body));
+		}
+		res.send(body);
 	})
 
-	res.send('checked'); 
+	//res.send(['checked',output]); 
 })
 
 app.listen(3000);

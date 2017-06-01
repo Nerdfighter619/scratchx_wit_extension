@@ -347,7 +347,7 @@
             method: 'GET',
             success: function(response) {
                 console.log("success!", response);
-                callback(true);//for test purposes only
+                callback(Array.isArray(response));//for test purposes only
             }
           });
     };
