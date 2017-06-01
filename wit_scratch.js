@@ -348,7 +348,7 @@
               console.log(i)
               if(i == new_entities.length){
                 console.log('calling back!')
-                setTimeout(callback_main, 2000)
+                setTimeout(callback_main, 1000)
               }
             })
           }
