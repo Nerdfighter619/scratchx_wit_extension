@@ -330,10 +330,10 @@
                   output = false;
                 }
                 callback(output);
-            }
+            },
             error: function(xhr, textStatus, errorThrown){
                console.log('FAIL');
-               callback(false)
+               callback(false);
             }
           });
         }
