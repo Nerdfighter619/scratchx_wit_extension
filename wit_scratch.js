@@ -37,7 +37,7 @@
         }
     };*/
 
-    ext.get_response = function(target, query, callback){
+    ext.get_interpretation = function(target, query, callback){
         //get one of the entities from wit's interpretation of your sentance
         $.ajax({
           url: 'https://api.wit.ai/message?v=20170506&q=',
@@ -311,6 +311,30 @@
         });
     };
 
+    ext.ping = function(callback){
+        //get all entities associated with the chatbot
+
+        $.ajax({
+          url: 'https://api.wit.ai/entities?v=20170506',
+          data: {
+            'access_token' : token
+          },
+          dataType: 'jsonp',
+          method: 'GET',
+          success: function(response) {
+              console.log("success!", response);
+              if (typeof response == 'array'){
+                output = true;
+              }
+              else{
+                output = false;
+              }
+              callback(output);
+          }
+        });
+    };
+
+
 
     // Block and block menu descriptions
     var descriptor = {
@@ -319,10 +343,11 @@
             ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
             ['R','number of entities','get_number_of_entities'],
-            ['R', 'get %s for %s','get_response','intent','What is your name?'],
+            ['R', 'get %s for %s','get_interpretation','intent','What is your name?'],
             ['R','get number of values for %s','get_number_of_values','intent'],
             ['R','for %s get value number %n','get_value_from_number','intent','0'],
-            ['R','get entity number %n','get_entity_from_number','0']
+            ['R','get entity number %n','get_entity_from_number','0'],
+            ['R','check connection','ping']
 
         ],
         menus: {

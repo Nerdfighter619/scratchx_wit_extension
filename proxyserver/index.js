@@ -68,7 +68,7 @@ app.post('/validate/:token/:message/:entities',function(req, res){
 		console.log(body)
 	})
 
-	res.send('success!');
+	res.send('validated!!');
 });
 
 //add a new value to an entity
@@ -102,7 +102,7 @@ app.post('/entityval/:token/:entity/:value',function(req, res){
 		console.log(body)
 	})
 
-	res.send('success!'); 
+	res.send('value added!!'); 
 });
 
 app.listen(3000);
