@@ -205,54 +205,12 @@
         if (typeof(values) == 'string'){
           values = [values]
         }
-        console.log(entities)
 
         ext.make_missing_entities(entities, function(){
           var url_t = ''   
           
           //var all_values = [];
             for (i=0;i<entities.length;i++){
-              //create entities if they do not exist
-              /*//get all the possible values for the entity
-              url_t = 'https://api.wit.ai/entities/';
-              url_t += entities[i];
-              url_t += '?v=20170307';
-              $.ajax({
-                url: url_t,
-                data: {
-                  'access_token' : token
-                },
-                dataType: 'jsonp',
-                method: 'GET',
-                success: function(response) {
-                    console.log("all values:", response);
-                    output = [];
-                    for (i = 0; i < response['values'].length;i++){
-                      output.push(response['values'][i]['value'])
-                      all_values = output;
-                    }
-                }
-              });
-
-              if (all_values.indexOf(values[i]) == -1){
-                url_t = proxy_address + 'entityval/';
-                url_t += token;
-                url_t += '/';
-                url_t += entities[i];
-                url_t += '/';
-                url_t += values[i];
-
-                url_t = encodeURI(url_t);
-
-                  $.ajax({
-                    url: url_t,
-                    method: 'POST',
-                    success: function(response) {
-                        console.log("success!", response);
-                        callback();
-                    }
-                  });
-              }*/
 
               //add values and entities to input
               console.log('test')
@@ -265,9 +223,7 @@
                 entities_sorted.push({'entity':entities[i],'value':values[i]})
               }
             }
-          /*catch(err){
-            entities_sorted = [{"entity":entities,"value":values}]
-          }*/
+
           entities_sorted = encodeURI(JSON.stringify(entities_sorted))
 
           //encode URI
@@ -294,7 +250,6 @@
     };
 
     ext.make_entity = function(entity, callback){
-      console.log('is this thing on?')
       var url_t = proxy_address + 'entity/';
       url_t += token;
       url_t += '/';
@@ -345,10 +300,8 @@
           for (i=0;i<new_entities.length;i++){
             ext.make_entity(entities[i],function(){
               console.log('making entity')
-              console.log(i)
               if(i == new_entities.length){
-                console.log('calling back!')
-                setTimeout(callback_main, 1000)
+                setTimeout(callback_main, 500)
               }
             })
           }
@@ -364,8 +317,6 @@
         blocks: [
             /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
             ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
-            /*['w', 'create entity named %s','make_entity','favorite_food'],
-            ['w', 'for %s create value named %s','make_value','favorite_food', 'cake'],*/
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
             ['R','number of entities','get_number_of_entities'],
             ['R', 'get %s for %s','get_response','intent','What is your name?'],
