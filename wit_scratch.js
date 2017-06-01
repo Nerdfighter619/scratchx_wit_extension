@@ -333,17 +333,17 @@
             /*['w', 'create new chatbot with name %s language %s and privacy %m.privacy', 'create_app','NewApp','en','false'],*/
             ['w', 'validate %s with entities %s for values %s','validate','Where are you?','intent','location_get'],
             [' ', 'set token to %s','set_token','EZHSAUWDGL4QBPPGA65EIA6MHT5SLN5J'],
-            ['R','number of entities','get_number_of_entities'],
+           // ['R','number of entities','get_number_of_entities'],
             ['R', 'get %s for %s','get_interpretation','intent','What is your name?'],
-            ['R','get number of values for %s','get_number_of_values','intent'],
+            /*['R','get number of values for %s','get_number_of_values','intent'],
             ['R','for %s get value number %n','get_value_from_number','intent','0'],
-            ['R','get entity number %n','get_entity_from_number','0'],
+            ['R','get entity number %n','get_entity_from_number','0'],*/
             ['R','check connection','ping']
 
         ],
-        menus: {
+        /*menus: {
             privacy: ['true','false']
-        },
+        },*/
     };
 
     // Register the extension
