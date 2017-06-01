@@ -331,7 +331,7 @@
                 }
                 callback(output);
             },
-            error: function(xhr, textStatus, errorThrown){
+            error: function(jqXHR, errorThrown){
                console.log('FAIL');
                callback(false);
             }
