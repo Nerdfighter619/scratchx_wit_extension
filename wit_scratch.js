@@ -323,7 +323,7 @@
           method: 'GET',
           success: function(response) {
               console.log("success!", response);
-              if (typeof response == 'array'){
+              if (Array.isArray(response) 'array'){
                 output = true;
               }
               else{
