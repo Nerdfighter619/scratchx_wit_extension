@@ -106,7 +106,7 @@ app.post('/entityval/:token/:entity/:value',function(req, res){
 });
 
 //get response
-app.post('/converse/:token/:message/:session_id',function(req, res){
+app.get('/converse/:token/:message/:session_id',function(req, res){
 	var auth_token = 'Bearer ';
 	auth_token += req.params.token;
 
@@ -121,9 +121,9 @@ app.post('/converse/:token/:message/:session_id',function(req, res){
 
 	var input = '[{"session_id":"';
 	input += req.params.session_id;
-	input += '","q":';
+	input += '","q":"';
 	input += message;
-	input += '}]';
+	input += '"}]';
 
 	console.log(input)
 
