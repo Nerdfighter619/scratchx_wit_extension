@@ -68,7 +68,7 @@ app.post('/validate/:token/:message/:entities',function(req, res){
 		console.log(body)
 	})
 
-	res.send('validated!!');
+	res.send('validated!');
 });
 
 //add a new value to an entity
@@ -103,6 +103,42 @@ app.post('/entityval/:token/:entity/:value',function(req, res){
 	})
 
 	res.send('value added!!'); 
+});
+
+//get response
+app.post('/converse/:token/:message/:session_id',function(req, res){
+	var auth_token = 'Bearer ';
+	auth_token += req.params.token;
+
+	//something to fix the message goes here
+	message = decodeURI(req.params.message);
+	message = message.replace('%3F','?');
+
+	var headers = {
+		'Authorization': auth_token,
+		'Content-Type': 'application/json'
+	}
+
+	var input = '[{"session_id":"';
+	input += req.params.session_id;
+	input += '","q":';
+	input += message;
+	input += '}]';
+
+	console.log(input)
+
+	var options = {
+		url: 'https://api.wit.ai/converse?v=20170506',
+		method: 'POST',
+		headers: headers,
+		form: input
+	}
+
+	request(options, function(error,response,body){
+		console.log(body)
+	})
+
+	res.send('conversed!');
 });
 
 //check connection
