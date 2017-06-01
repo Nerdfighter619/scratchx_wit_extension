@@ -331,6 +331,10 @@
                 }
                 callback(output);
             }
+            error: function(xhr, textStatus, errorThrown){
+               console.log('FAIL');
+               callback(false)
+            }
           });
         }
         catch(err){
