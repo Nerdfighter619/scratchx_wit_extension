@@ -313,30 +313,30 @@
 
     ext.ping = function(callback){
         //get all entities associated with the chatbot
+        try{
+          $.ajax({
+            url: 'https://api.wit.ai/entities?v=20170506',
+            data: {
+              'access_token' : token
+            },
+            dataType: 'jsonp',
+            method: 'GET',
+            success: function(response) {
+                console.log("success!", response);
+                if (Array.isArray(response) == true){
+                  output = true;
+                }
+                else{
+                  output = false;
+                }
+                callback(output);
+            }
+          });
+        }
+        catch(err){
+          callback(false);
+        }
 
-        $.ajax({
-          url: 'https://api.wit.ai/entities?v=20170506',
-          data: {
-            'access_token' : token
-          },
-          dataType: 'jsonp',
-          method: 'GET',
-          success: function(response) {
-              console.log("success!", response);
-              if (Array.isArray(response) == true){
-                output = true;
-              }
-              else{
-                output = false;
-              }
-              callback(output);
-          }
-          error: function(response){
-            console.log("FAIL", response);
-            output = false;
-            callback(output);
-          }
-        });
     };
 
 
