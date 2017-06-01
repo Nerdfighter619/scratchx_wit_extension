@@ -105,4 +105,32 @@ app.post('/entityval/:token/:entity/:value',function(req, res){
 	res.send('value added!!'); 
 });
 
+//check connection
+app.get('/check/:token',function(req, res){
+	var auth_token = 'Bearer ';
+	auth_token += req.params.token;
+
+	var url = 'https://api.wit.ai/entities?v=20170506'
+
+	console.log(url)
+
+	var headers = {
+		'Authorization': auth_token,
+		'Content-Type': 'application/json'
+	}
+
+	var options = {
+		url: url,
+		method: 'GET',
+		headers: headers,
+
+	}
+
+	request(options, function(error,response,body){
+		console.log(body)
+	})
+
+	res.send('checked'); 
+})
+
 app.listen(3000);

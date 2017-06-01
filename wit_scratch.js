@@ -313,7 +313,7 @@
 
     ext.ping = function(callback){
         //get all entities associated with the chatbot
-        try{
+        /*try{
           $.ajax({
             url: 'https://api.wit.ai/entities?v=20170506',
             data: {
@@ -339,8 +339,17 @@
         }
         catch(err){
           callback(false);
-        }
-
+        }*/
+        var url_t = proxy_address + 'check/';
+        url_t += token;
+          $.ajax({
+            url: url_t,
+            method: 'GET',
+            success: function(response) {
+                console.log("success!", response);
+                callback(true);//for test purposes only
+            }
+          });
     };
 
 
