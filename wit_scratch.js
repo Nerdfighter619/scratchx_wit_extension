@@ -312,34 +312,7 @@
     };
 
     ext.ping = function(callback){
-        //get all entities associated with the chatbot
-        /*try{
-          $.ajax({
-            url: 'https://api.wit.ai/entities?v=20170506',
-            data: {
-              'access_token' : token
-            },
-            dataType: 'jsonp',
-            method: 'GET',
-            success: function(response) {
-                console.log("success!", response);
-                if (Array.isArray(response) == true){
-                  output = true;
-                }
-                else{
-                  output = false;
-                }
-                callback(output);
-            },
-            error: function(jqXHR, errorThrown){
-               console.log('FAIL');
-               callback(false);
-            }
-          });
-        }
-        catch(err){
-          callback(false);
-        }*/
+      //make sure token is correct
         var url_t = proxy_address + 'check/';
         url_t += token;
           $.ajax({
@@ -347,7 +320,7 @@
             method: 'GET',
             success: function(response) {
                 console.log("success!", response);
-                callback(response);//for test purposes only
+                callback(response);
             }
           });
     };
